@@ -1,6 +1,6 @@
 # Saraha Game API
 
-Welcome to the documentation for Saraha Game API! This system is built using Node.js, MongoDB, and Express, providing a robust backend solution for managing messages and user authentication.
+Welcome to the documentation for Saraha Game API! This API is built using Node.js and MongoDB, designed to facilitate user registration, authentication, and messaging functionalities.
 
 ---
 
@@ -10,8 +10,8 @@ Welcome to the documentation for Saraha Game API! This system is built using Nod
 2. [Installation](#installation)
 3. [Models](#models)
 4. [API Endpoints](#api-endpoints)
-5. [Authentication](#authentication)
-6. [Validation and Error Handling](#validation-and-error-handling)
+5. [Error Handling](#error-handling)
+6. [Validation](#validation)
 7. [Contributing](#contributing)
 8. [Postman Collection](#postman-collection)
 
@@ -19,69 +19,77 @@ Welcome to the documentation for Saraha Game API! This system is built using Nod
 
 ## Introduction
 
-Saraha Game API simplifies the process of managing messages between users, offering functionalities for CRUD operations, user authentication, and secure token-based authorization.
+Saraha Game API provides essential functionalities for user management and messaging. It supports user registration, authentication, and operations related to sending and receiving messages.
 
 ## Installation
 
-To set up the Saraha Game API locally, follow these steps:
+To set up Saraha Game API locally, follow these steps:
 
 - Clone the GitHub repository to your local machine.
 - Install the necessary dependencies using npm or yarn.
 - Configure the MongoDB connection in the application.
-- Set up environment variables for JWT secret and MongoDB connection URI.
 - Run the application using `npm start` or `yarn start`.
 
 ## Models
 
 ### User Model
 
-- **username**: String (required) - Username of the user.
-- **email**: String (required) - Email of the user.
-- **password**: String (required) - Hashed password of the user.
-- **otp**: String - One-time password for verification.
+- **username**: String (required) - User's username.
+- **email**: String (required) - User's email address.
+- **password**: String (required) - User's hashed password.
+- **otp**: String - One-time password for email verification.
 
 ### Message Model
 
-- **content**: String (required) - Content or message text.
-- **receiverId**: ObjectId (required) - ID of the recipient user.
+- **content**: String (required) - Content of the message.
+- **receiverId**: ObjectId (required) - ID of the message receiver.
 
 ## API Endpoints
 
-### Authentication
+### User Routes
 
-- **POST /api/auth/register**
-  - Register a new user.
-  - Validates email existence and hashes passwords before storing.
+- **POST /user/signUp**
+  - Create a new user account.
+  - Validates user input against predefined rules.
+  - Checks email existence before signing up.
+  - Hashes user passwords securely before storing.
+  - **Error Handling**: Returns appropriate errors for validation failures, email existence, or server issues.
 
-- **POST /api/auth/login**
-  - Authenticate a user and generate a JWT token for authorization.
+- **POST /user/signIn**
+  - Authenticate user credentials and generate JWT token.
+  - Validates user input against predefined rules.
+  - **Error Handling**: Returns errors for incorrect credentials, validation failures, or server issues.
 
-- **GET /api/auth/verify/:token**
-  - Verify user registration via OTP token.
+- **PUT /user/verifyEmail**
+  - Verify user email using OTP (One-Time Password).
+  - Validates OTP input against predefined rules.
+  - **Error Handling**: Returns errors for invalid OTP, expired tokens, or server issues.
 
-### Messages
+### Message Routes
 
-- **POST /api/messages**
-  - Create a new message.
-  - Requires authentication token in headers.
+- **POST /message/sendMessage**
+  - Send a new message.
+  - Validates message content and receiver ID.
+  - Requires authentication using JWT token.
+  - **Error Handling**: Returns errors for authentication failures, validation issues, or server errors.
 
-- **GET /api/messages**
+- **GET /message/getMessages**
   - Retrieve all messages for the authenticated user.
-  - Requires authentication token in headers.
+  - Requires authentication using JWT token.
+  - **Error Handling**: Returns errors for authentication failures or server errors.
 
-- **DELETE /api/messages/:id**
+- **DELETE /message/deleteMessage/:id**
   - Delete a specific message by its ID.
-  - Requires authentication token in headers.
+  - Requires authentication using JWT token.
+  - **Error Handling**: Returns errors for authentication failures, permission issues, or server errors.
 
-## Authentication
+## Error Handling
 
-Token-based authentication is implemented using JSON Web Tokens (JWT). Tokens are generated upon successful login and used to authenticate API requests.
+Saraha Game API implements robust error handling to provide meaningful responses for various scenarios, including validation errors, authentication failures, and server issues. Each endpoint is designed to return appropriate HTTP status codes and error messages to aid in debugging and client-side handling.
 
-## Validation and Error Handling
+## Validation
 
-The API includes robust validation and error handling mechanisms:
-- Input validation for user registration and message creation.
-- Error handling middleware to manage exceptions and provide appropriate error responses.
+Input validation ensures that data sent to the API is accurate and meets specified criteria. Saraha Game API uses validation middleware to check request bodies, query parameters, and authentication tokens before processing requests. Validation errors are communicated clearly to clients to facilitate correct usage of the API.
 
 ## Contributing
 
@@ -89,4 +97,8 @@ Contributions to the Saraha Game API project are welcome! Feel free to fork the 
 
 ## Postman Collection
 
-Explore and test our API endpoints using [Postman](https://documenter.getpostman.com/view/34440263/2sA3dvjsDP). You can access our complete API documentation and interact with our endpoints through our [Postman Collection](https://documenter.getpostman.com/view/34440263/2sA3dvjsDP).
+Explore and test our API endpoints using [Postman](https://documenter.getpostman.com/view/34440263/2sA3XWcyUq#4bee873d-38d1-4858-8f9e-de49638fe7b9). You can access our complete API documentation and interact with our endpoints through our [Postman Collection](https://documenter.getpostman.com/view/34440263/2sA3XWcyUq#4bee873d-38d1-4858-8f9e-de49638fe7b9).
+
+---
+
+This documentation provides a comprehensive guide to understanding and using the Saraha Game API effectively.
