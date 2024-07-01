@@ -1,6 +1,6 @@
 # Saraha Game API
 
-Welcome to the documentation for Saraha Game API! This API is built using Node.js and MongoDB, designed to facilitate user registration, authentication, and messaging functionalities.
+This API, built using Node.js and MongoDB, facilitates user registration, authentication, and messaging functionalities.
 
 ---
 
@@ -97,7 +97,7 @@ Contributions to the Saraha Game API project are welcome! Feel free to fork the 
 
 ## Postman Collection
 
-Explore and test our API endpoints using [Postman](https://documenter.getpostman.com/view/34440263/2sA3XWcyUq#4bee873d-38d1-4858-8f9e-de49638fe7b9). You can access our complete API documentation and interact with our endpoints through our [Postman Collection](https://documenter.getpostman.com/view/34440263/2sA3XWcyUq#4bee873d-38d1-4858-8f9e-de49638fe7b9).
+Explore and test our API endpoints using [Postman](https://documenter.getpostman.com/view/34440263/2sA3dvjsDP). You can access our complete API documentation and interact with our endpoints through our [Postman Collection](https://documenter.getpostman.com/view/34440263/2sA3dvjsDP).
 
 ---
 
