@@ -5,7 +5,6 @@ export const verifyToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        console.log("Token not provided or invalid format!");
         return next(new appError("Unauthorized", 401));
     }
 
@@ -13,7 +12,6 @@ export const verifyToken = (req, res, next) => {
 
     jwt.verify(token, "sarahaAppPasswordToken", (err, decoded) => {
         if (err) {
-            console.log("Token verification failed:", err.message);
             return next(new appError("Invalid token", 401));
         }
         req.user = decoded;
